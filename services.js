@@ -49,11 +49,11 @@ document.addEventListener("DOMContentLoaded", function () {
             oldListItem.classList.remove("active");
             newListItem.classList.add("active");
 
-            if(currentID=="creative"){
-                changeColor('white');
-            }
-            else if(newID=="creative"){
+            if(newID=="creative"){
                 changeColor('black');
+            }
+            else{
+                changeColor('white');
             }
 
             currentID = newID; 
@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    //**** Interaction observer ****//
+    //**** Event listeners ****//
     const options = {
         root: null,
         threshold: 0,
@@ -120,8 +120,20 @@ document.addEventListener("DOMContentLoaded", function () {
         this.oldScroll = this.scrollY;
     }
 
+    //on load
     updateStickyMenu();
-    changeColor('white');
 
+
+    addEventListener("load", (event) => {
+        updateStickyMenu();
+    });
+
+
+    //on menu link click 
+    var links = document.getElementsByClassName('sticky-sidebar-link');
+    
+    for(var i = 0; i < links.length; i++){
+        links[i].addEventListener("click",updateStickyMenu());
+    }
 
 });
